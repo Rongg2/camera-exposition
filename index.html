@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<title>סימולטור חשיפה לתלמידי קולנוע</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #333;
+    color: #fff;
+  }
+  .gallery {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* מלא את גובה המסך */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .image-container img {
+    max-width: 100%;
+    max-height: 100vh;
+    object-fit: contain; /* מתאים את התמונה למסך בלי לחתוך */
+    transition: opacity 0.5s; /* הוספת מעבר חלק */
+  }
+  .button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 20px;
+    font-size: 24px;
+    z-index: 10;
+  }
+  .prev {
+    left: 10px;
+  }
+  .next {
+    right: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="gallery">
+  <div class="image-container">
+    <img src="https://i.imgur.com/wIw6Fxh.jpeg" id="currentImage">
+  </div>
+  <button class="button prev" onclick="changeImage(-1)">❮</button>
+  <button class="button next" onclick="changeImage(1)">❯</button>
+</div>
+
+<script>
+  var images = [
+    "https://i.imgur.com/wIw6Fxh.jpeg",
+    "https://i.imgur.com/s8BikPg.jpeg",
+    "https://i.imgur.com/M0pgJPT.jpeg",
+    "https://i.imgur.com/krC8LA8.jpeg",
+    "https://i.imgur.com/cs1gvMi.jpeg",
+    "https://i.imgur.com/te3QW0i.jpeg"
+  ];
+  var index = 0;
+
+  function changeImage(step) {
+    index += step;
+    if (index < 0) index = images.length - 1;
+    else if (index >= images.length) index = 0;
+    var imgElement = document.getElementById("currentImage");
+    imgElement.style.opacity = 0;
+    setTimeout(function() {
+      imgElement.src = images[index];
+      imgElement.style.opacity = 1;
+    }, 500); // מעבר חלק לאחר עמעום התמונה
+  }
+</script>
+</body>
+</html>
